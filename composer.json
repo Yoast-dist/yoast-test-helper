@@ -1,0 +1,22 @@
+{
+  "name": "yoast/test-helper",
+  "type": "wordpress-plugin",
+  "description": "Yoast plugin testing helper",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Team Yoast",
+      "email": "support@yoast.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Yoast\\Test_Helper\\": "src/"
+    }
+  },
+  "require-dev": {
+    "yoast/yoastcs": "^0.5",
+    "roave/security-advisories": "dev-master",
+    "dealerdirect/phpcodesniffer-composer-installer": "0.4.3"
+  }
+}
