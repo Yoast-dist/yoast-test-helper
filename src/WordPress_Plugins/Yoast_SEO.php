@@ -73,6 +73,8 @@ class Yoast_SEO implements WordPress_Plugin {
 		return array(
 			'internal_link_count'         => 'Internal link counter',
 			'prominent_words_calculation' => 'Prominent words calculation',
+			'reset_notifications'         => 'Notifications',
+			'reset_site_information'      => 'Site information',
 		);
 	}
 
@@ -91,6 +93,11 @@ class Yoast_SEO implements WordPress_Plugin {
 			case 'prominent_words_calculation':
 				$this->reset_prominent_words_calculation();
 				return true;
+			case 'reset_notifications':
+				$this->reset_notifications();
+				return true;
+			case 'reset_site_information':
+				return $this->reset_site_information();
 		}
 
 		return false;
@@ -125,5 +132,39 @@ class Yoast_SEO implements WordPress_Plugin {
 		global $wpdb;
 
 		$wpdb->delete( $wpdb->prefix . 'postmeta', array( 'meta_key' => '_yst_prominent_words_version' ) );
+	}
+
+	/**
+	 * Resets all notifications.
+	 *
+	 * @return void
+	 */
+	private function reset_notifications() {
+		global $wpdb;
+
+		// Remove all notifications from the saved stack.
+		$wpdb->delete( $wpdb->prefix . 'usermeta',
+			array(
+				'meta_key' => 'wp_yoast_notifications',
+				'user_id'  => get_current_user_id(),
+			)
+		);
+
+		// Delete all muted notification settings.
+		$wpdb->query( $wpdb->prepare( 'DELETE FROM ' . $wpdb->prefix . 'usermeta WHERE meta_key LIKE %s AND meta_value="seen"', 'wpseo-%' ) );
+		$wpdb->query( $wpdb->prepare( 'DELETE FROM ' . $wpdb->prefix . 'usermeta WHERE meta_key LIKE %s AND meta_value="seen"', 'wp_wpseo-%' ) );
+
+		// Restore dismissed notifications.
+		$wpdb->query( 'DELETE FROM ' . $wpdb->prefix . 'usermeta WHERE meta_key = "wp_yoast_promo_hide_premium_upsell_admin_block"' );
+		$wpdb->query( 'DELETE FROM ' . $wpdb->prefix . 'usermeta WHERE meta_key = "wpseo-remove-upsell-notice"' );
+	}
+
+	/**
+	 * Resets the site information.
+	 *
+	 * @return bool True if successful, false otherwise.
+	 */
+	private function reset_site_information() {
+		return delete_transient( 'wpseo_site_information' );
 	}
 }

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitca634485d9819412f0f65d923e72239a
+class ComposerStaticInite82c4eb507b17141266517cf6faf27d8
 {
     public static $prefixLengthsPsr4 = array (
         'Y' => 
@@ -24,6 +24,7 @@ class ComposerStaticInitca634485d9819412f0f65d923e72239a
         'Yoast\\Test_Helper\\Admin_Debug_Info' => __DIR__ . '/../..' . '/src/Admin_Debug_Info.php',
         'Yoast\\Test_Helper\\Admin_Notifications' => __DIR__ . '/../..' . '/src/Admin_Notifications.php',
         'Yoast\\Test_Helper\\Admin_Page' => __DIR__ . '/../..' . '/src/Admin_Page.php',
+        'Yoast\\Test_Helper\\Feature_Toggler' => __DIR__ . '/../..' . '/src/Feature_Toggler.php',
         'Yoast\\Test_Helper\\Form_Presenter' => __DIR__ . '/../..' . '/src/Form_Presenter.php',
         'Yoast\\Test_Helper\\Integration' => __DIR__ . '/../..' . '/src/Integration.php',
         'Yoast\\Test_Helper\\Notification' => __DIR__ . '/../..' . '/src/Notification.php',
@@ -31,6 +32,7 @@ class ComposerStaticInitca634485d9819412f0f65d923e72239a
         'Yoast\\Test_Helper\\Plugin' => __DIR__ . '/../..' . '/src/Plugin.php',
         'Yoast\\Test_Helper\\Plugin_Toggler' => __DIR__ . '/../..' . '/src/Plugin_Toggler.php',
         'Yoast\\Test_Helper\\Post_Types' => __DIR__ . '/../..' . '/src/Post_Types.php',
+        'Yoast\\Test_Helper\\Schema' => __DIR__ . '/../..' . '/src/Schema.php',
         'Yoast\\Test_Helper\\Taxonomies' => __DIR__ . '/../..' . '/src/Taxonomies.php',
         'Yoast\\Test_Helper\\Upgrade_Detector' => __DIR__ . '/../..' . '/src/Upgrade_Detector.php',
         'Yoast\\Test_Helper\\WordPress_Plugin_Features' => __DIR__ . '/../..' . '/src/WordPress_Plugin_Features.php',
@@ -49,9 +51,9 @@ class ComposerStaticInitca634485d9819412f0f65d923e72239a
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitca634485d9819412f0f65d923e72239a::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitca634485d9819412f0f65d923e72239a::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitca634485d9819412f0f65d923e72239a::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInite82c4eb507b17141266517cf6faf27d8::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInite82c4eb507b17141266517cf6faf27d8::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInite82c4eb507b17141266517cf6faf27d8::$classMap;
 
         }, null, ClassLoader::class);
     }
