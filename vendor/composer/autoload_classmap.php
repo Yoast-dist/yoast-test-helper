@@ -9,6 +9,7 @@ return array(
     'Yoast\\Test_Helper\\Admin_Debug_Info' => $baseDir . '/src/Admin_Debug_Info.php',
     'Yoast\\Test_Helper\\Admin_Notifications' => $baseDir . '/src/Admin_Notifications.php',
     'Yoast\\Test_Helper\\Admin_Page' => $baseDir . '/src/Admin_Page.php',
+    'Yoast\\Test_Helper\\Domain_Dropdown' => $baseDir . '/src/Domain_Dropdown.php',
     'Yoast\\Test_Helper\\Feature_Toggler' => $baseDir . '/src/Feature_Toggler.php',
     'Yoast\\Test_Helper\\Form_Presenter' => $baseDir . '/src/Form_Presenter.php',
     'Yoast\\Test_Helper\\Integration' => $baseDir . '/src/Integration.php',

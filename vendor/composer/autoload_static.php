@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitce82de1b58673e6a6cdcd966d9e05bfc
+class ComposerStaticInit604fd674ef5244c8a6f6e688008f031e
 {
     public static $prefixLengthsPsr4 = array (
         'Y' => 
@@ -24,6 +24,7 @@ class ComposerStaticInitce82de1b58673e6a6cdcd966d9e05bfc
         'Yoast\\Test_Helper\\Admin_Debug_Info' => __DIR__ . '/../..' . '/src/Admin_Debug_Info.php',
         'Yoast\\Test_Helper\\Admin_Notifications' => __DIR__ . '/../..' . '/src/Admin_Notifications.php',
         'Yoast\\Test_Helper\\Admin_Page' => __DIR__ . '/../..' . '/src/Admin_Page.php',
+        'Yoast\\Test_Helper\\Domain_Dropdown' => __DIR__ . '/../..' . '/src/Domain_Dropdown.php',
         'Yoast\\Test_Helper\\Feature_Toggler' => __DIR__ . '/../..' . '/src/Feature_Toggler.php',
         'Yoast\\Test_Helper\\Form_Presenter' => __DIR__ . '/../..' . '/src/Form_Presenter.php',
         'Yoast\\Test_Helper\\Integration' => __DIR__ . '/../..' . '/src/Integration.php',
@@ -51,9 +52,9 @@ class ComposerStaticInitce82de1b58673e6a6cdcd966d9e05bfc
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitce82de1b58673e6a6cdcd966d9e05bfc::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitce82de1b58673e6a6cdcd966d9e05bfc::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitce82de1b58673e6a6cdcd966d9e05bfc::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit604fd674ef5244c8a6f6e688008f031e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit604fd674ef5244c8a6f6e688008f031e::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit604fd674ef5244c8a6f6e688008f031e::$classMap;
 
         }, null, ClassLoader::class);
     }
