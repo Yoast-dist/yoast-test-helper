@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit604fd674ef5244c8a6f6e688008f031e
+class ComposerStaticInit65532dd64c57ce4b4f5d541bdc014d5f
 {
     public static $prefixLengthsPsr4 = array (
         'Y' => 
@@ -24,9 +24,11 @@ class ComposerStaticInit604fd674ef5244c8a6f6e688008f031e
         'Yoast\\Test_Helper\\Admin_Debug_Info' => __DIR__ . '/../..' . '/src/Admin_Debug_Info.php',
         'Yoast\\Test_Helper\\Admin_Notifications' => __DIR__ . '/../..' . '/src/Admin_Notifications.php',
         'Yoast\\Test_Helper\\Admin_Page' => __DIR__ . '/../..' . '/src/Admin_Page.php',
+        'Yoast\\Test_Helper\\Development_Mode' => __DIR__ . '/../..' . '/src/Development_Mode.php',
         'Yoast\\Test_Helper\\Domain_Dropdown' => __DIR__ . '/../..' . '/src/Domain_Dropdown.php',
         'Yoast\\Test_Helper\\Feature_Toggler' => __DIR__ . '/../..' . '/src/Feature_Toggler.php',
         'Yoast\\Test_Helper\\Form_Presenter' => __DIR__ . '/../..' . '/src/Form_Presenter.php',
+        'Yoast\\Test_Helper\\Inline_Script' => __DIR__ . '/../..' . '/src/Inline_Script.php',
         'Yoast\\Test_Helper\\Integration' => __DIR__ . '/../..' . '/src/Integration.php',
         'Yoast\\Test_Helper\\Notification' => __DIR__ . '/../..' . '/src/Notification.php',
         'Yoast\\Test_Helper\\Option' => __DIR__ . '/../..' . '/src/Option.php',
@@ -52,9 +54,9 @@ class ComposerStaticInit604fd674ef5244c8a6f6e688008f031e
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit604fd674ef5244c8a6f6e688008f031e::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit604fd674ef5244c8a6f6e688008f031e::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit604fd674ef5244c8a6f6e688008f031e::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit65532dd64c57ce4b4f5d541bdc014d5f::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit65532dd64c57ce4b4f5d541bdc014d5f::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit65532dd64c57ce4b4f5d541bdc014d5f::$classMap;
 
         }, null, ClassLoader::class);
     }
