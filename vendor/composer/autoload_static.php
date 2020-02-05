@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit11616a3ec2ac6f0765527bc3e29d6cf1
+class ComposerStaticInitbf32f5ba5d62abd82ea8e807b0c03649
 {
     public static $prefixLengthsPsr4 = array (
         'Y' => 
@@ -48,15 +48,16 @@ class ComposerStaticInit11616a3ec2ac6f0765527bc3e29d6cf1
         'Yoast\\Test_Helper\\WordPress_Plugins\\WooCommerce_SEO' => __DIR__ . '/../..' . '/src/WordPress_Plugins/WooCommerce_SEO.php',
         'Yoast\\Test_Helper\\WordPress_Plugins\\WordPress_Plugin' => __DIR__ . '/../..' . '/src/WordPress_Plugins/WordPress_Plugin.php',
         'Yoast\\Test_Helper\\WordPress_Plugins\\Yoast_SEO' => __DIR__ . '/../..' . '/src/WordPress_Plugins/Yoast_SEO.php',
+        'Yoast\\Test_Helper\\WordPress_Plugins\\Yoast_SEO_Premium' => __DIR__ . '/../..' . '/src/WordPress_Plugins/Yoast_SEO_Premium.php',
         'Yoast\\Test_Helper\\XML_Sitemaps' => __DIR__ . '/../..' . '/src/XML_Sitemaps.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit11616a3ec2ac6f0765527bc3e29d6cf1::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit11616a3ec2ac6f0765527bc3e29d6cf1::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit11616a3ec2ac6f0765527bc3e29d6cf1::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitbf32f5ba5d62abd82ea8e807b0c03649::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitbf32f5ba5d62abd82ea8e807b0c03649::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitbf32f5ba5d62abd82ea8e807b0c03649::$classMap;
 
         }, null, ClassLoader::class);
     }

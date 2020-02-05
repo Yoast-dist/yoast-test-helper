@@ -33,5 +33,6 @@ return array(
     'Yoast\\Test_Helper\\WordPress_Plugins\\WooCommerce_SEO' => $baseDir . '/src/WordPress_Plugins/WooCommerce_SEO.php',
     'Yoast\\Test_Helper\\WordPress_Plugins\\WordPress_Plugin' => $baseDir . '/src/WordPress_Plugins/WordPress_Plugin.php',
     'Yoast\\Test_Helper\\WordPress_Plugins\\Yoast_SEO' => $baseDir . '/src/WordPress_Plugins/Yoast_SEO.php',
+    'Yoast\\Test_Helper\\WordPress_Plugins\\Yoast_SEO_Premium' => $baseDir . '/src/WordPress_Plugins/Yoast_SEO_Premium.php',
     'Yoast\\Test_Helper\\XML_Sitemaps' => $baseDir . '/src/XML_Sitemaps.php',
 );
