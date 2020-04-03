@@ -1,16 +1,12 @@
 <?php
-/**
- * Handler for the Schema testing functions.
- *
- * @package Yoast\Test_Helper
- */
 
-namespace Yoast\Test_Helper;
+namespace Yoast\WP\Test_Helper;
 
 /**
  * Class to manage registering and rendering the admin page in WordPress.
  */
 class Schema implements Integration {
+
 	/**
 	 * Holds our option instance.
 	 *
@@ -32,30 +28,30 @@ class Schema implements Integration {
 	 */
 	public function add_hooks() {
 		if ( $this->option->get( 'replace_schema_domain' ) === true ) {
-			add_filter( 'wpseo_debug_json_data', array( $this, 'replace_domain' ) );
+			add_filter( 'wpseo_debug_json_data', [ $this, 'replace_domain' ] );
 		}
 
 		switch ( $this->option->get( 'is_needed_breadcrumb' ) ) {
 			case 'show':
 			case 'hide':
-				add_filter( 'wpseo_schema_needs_breadcrumb', array( $this, 'filter_is_needed_breadcrumb' ) );
+				add_filter( 'wpseo_schema_needs_breadcrumb', [ $this, 'filter_is_needed_breadcrumb' ] );
 				break;
 			default:
-				remove_filter( 'wpseo_schema_needs_breadcrumb', array( $this, 'filter_is_needed_breadcrumb' ) );
+				remove_filter( 'wpseo_schema_needs_breadcrumb', [ $this, 'filter_is_needed_breadcrumb' ] );
 				break;
 		}
 
 		switch ( $this->option->get( 'is_needed_webpage' ) ) {
 			case 'show':
 			case 'hide':
-				add_filter( 'wpseo_schema_needs_webpage', array( $this, 'filter_is_needed_webpage' ) );
+				add_filter( 'wpseo_schema_needs_webpage', [ $this, 'filter_is_needed_webpage' ] );
 				break;
 			default:
-				remove_filter( 'wpseo_schema_needs_webpage', array( $this, 'filter_is_needed_webpage' ) );
+				remove_filter( 'wpseo_schema_needs_webpage', [ $this, 'filter_is_needed_webpage' ] );
 				break;
 		}
 
-		add_action( 'admin_post_yoast_seo_test_schema', array( $this, 'handle_submit' ) );
+		add_action( 'admin_post_yoast_seo_test_schema', [ $this, 'handle_submit' ] );
 	}
 
 	/**
@@ -70,11 +66,11 @@ class Schema implements Integration {
 			$this->option->get( 'replace_schema_domain' )
 		);
 
-		$select_options = array(
+		$select_options = [
 			'none' => 'Don\'t influence',
 			'show' => 'Always include',
 			'hide' => 'Never include',
-		);
+		];
 
 		$output .= Form_Presenter::create_select(
 			'is_needed_breadcrumb',
@@ -103,10 +99,28 @@ class Schema implements Integration {
 			$this->option->set( 'replace_schema_domain', isset( $_POST['replace_schema_domain'] ) );
 		}
 
-		$this->option->set( 'is_needed_breadcrumb', $_POST['is_needed_breadcrumb'] );
-		$this->option->set( 'is_needed_webpage', $_POST['is_needed_webpage'] );
+		$is_needed_breadcrumb = $this->validate_submit( filter_input( INPUT_POST, 'is_needed_breadcrumb' ) );
+		$is_needed_webpage    = $this->validate_submit( filter_input( INPUT_POST, 'is_needed_webpage' ) );
 
-		wp_safe_redirect( self_admin_url( 'tools.php?page=' . apply_filters( 'yoast_version_control_admin_page', '' ) ) );
+		$this->option->set( 'is_needed_breadcrumb', $is_needed_breadcrumb );
+		$this->option->set( 'is_needed_webpage', $is_needed_webpage );
+
+		wp_safe_redirect( self_admin_url( 'tools.php?page=' . apply_filters( 'Yoast\WP\Test_Helper\admin_page', '' ) ) );
+	}
+
+	/**
+	 * Make sure we only store data we know how to deal with.
+	 *
+	 * @param string $value The submitted value.
+	 *
+	 * @return string The validated submit value.
+	 */
+	private function validate_submit( $value ) {
+		$value = (string) $value;
+		if ( in_array( $value, [ 'none', 'show', 'hide' ], true ) ) {
+			return $value;
+		}
+		return 'none';
 	}
 
 	/**
@@ -121,7 +135,7 @@ class Schema implements Integration {
 		$target = 'https://example.com';
 
 		if ( $source[ ( strlen( $source ) - 1 ) ] === '/' ) {
-			$source = substr( $source, 0, -1 );
+			$source = substr( $source, 0, - 1 );
 		}
 
 		return $this->array_value_str_replace( $source, $target, $data );

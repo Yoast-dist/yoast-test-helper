@@ -1,16 +1,14 @@
 <?php
-/**
- * Yoast SEO plugin
- *
- * @package Yoast\Test_Helper
- */
 
-namespace Yoast\Test_Helper\WordPress_Plugins;
+namespace Yoast\WP\Test_Helper\WordPress_Plugins;
+
+use WPSEO_Options;
 
 /**
  * Class to represent Yoast SEO.
  */
 class Yoast_SEO implements WordPress_Plugin {
+
 	/**
 	 * Retrieves the plugin identifier.
 	 *
@@ -53,7 +51,7 @@ class Yoast_SEO implements WordPress_Plugin {
 	 * @return array The options.
 	 */
 	public function get_options() {
-		return array(
+		return [
 			'wpseo',
 			'wpseo_xml',
 			'wpseo_rss',
@@ -61,7 +59,7 @@ class Yoast_SEO implements WordPress_Plugin {
 			'wpseo_internallinks',
 			'wpseo_permalinks',
 			'wpseo_titles',
-		);
+		];
 	}
 
 	/**
@@ -70,13 +68,15 @@ class Yoast_SEO implements WordPress_Plugin {
 	 * @return array List of features.
 	 */
 	public function get_features() {
-		return array(
+		return [
 			'internal_link_count'         => 'Internal link counter',
 			'prominent_words_calculation' => 'Prominent words calculation',
+			'reset_configuration_wizard'  => 'Configuration wizard',
 			'reset_notifications'         => 'Notifications',
 			'reset_site_information'      => 'Site information',
 			'reset_tracking'              => 'Tracking',
-		);
+			'reset_indexables'            => 'Indexables tables & migrations',
+		];
 	}
 
 	/**
@@ -94,6 +94,10 @@ class Yoast_SEO implements WordPress_Plugin {
 			case 'prominent_words_calculation':
 				$this->reset_prominent_words_calculation();
 				return true;
+			case 'reset_configuration_wizard':
+				return $this->reset_configuration_wizard();
+			case 'reset_indexables':
+				return $this->reset_indexables();
 			case 'reset_notifications':
 				$this->reset_notifications();
 				return true;
@@ -134,7 +138,7 @@ class Yoast_SEO implements WordPress_Plugin {
 	private function reset_prominent_words_calculation() {
 		global $wpdb;
 
-		$wpdb->delete( $wpdb->prefix . 'postmeta', array( 'meta_key' => '_yst_prominent_words_version' ) );
+		$wpdb->delete( $wpdb->prefix . 'postmeta', [ 'meta_key' => '_yst_prominent_words_version' ] );
 	}
 
 	/**
@@ -146,11 +150,12 @@ class Yoast_SEO implements WordPress_Plugin {
 		global $wpdb;
 
 		// Remove all notifications from the saved stack.
-		$wpdb->delete( $wpdb->prefix . 'usermeta',
-			array(
+		$wpdb->delete(
+			$wpdb->prefix . 'usermeta',
+			[
 				'meta_key' => 'wp_yoast_notifications',
 				'user_id'  => get_current_user_id(),
-			)
+			]
 		);
 
 		// Delete all muted notification settings.
@@ -178,5 +183,37 @@ class Yoast_SEO implements WordPress_Plugin {
 	 */
 	private function reset_tracking() {
 		return delete_option( 'wpseo_tracking_last_request' );
+	}
+
+	/**
+	 * Resets the configuration wizard to its initial state.
+	 *
+	 * @return bool True if successful, false otherwise.
+	 */
+	private function reset_configuration_wizard() {
+		update_user_meta( get_current_user_id(), 'wpseo-dismiss-configuration-notice', 'no' );
+
+		return WPSEO_Options::set( 'show_onboarding_notice', true );
+	}
+
+	/**
+	 * Resets the indexables tables, basically deleting them.
+	 *
+	 * @return bool True if successful, false otherwise.
+	 */
+	private function reset_indexables() {
+		global $wpdb;
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.SchemaChange -- We know.
+		$wpdb->query( 'DROP TABLE ' . $wpdb->prefix . 'yoast_indexable' );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.SchemaChange -- What.
+		$wpdb->query( 'DROP TABLE ' . $wpdb->prefix . 'yoast_indexable_hierarchy' );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.SchemaChange -- We're doing.
+		$wpdb->query( 'DROP TABLE ' . $wpdb->prefix . 'yoast_migrations' );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.SchemaChange -- Really.
+		$wpdb->query( 'DROP TABLE ' . $wpdb->prefix . 'yoast_primary_term' );
+
+		delete_option( 'yoast_migrations_premium' );
+		return delete_option( 'yoast_migrations_free' );
 	}
 }
