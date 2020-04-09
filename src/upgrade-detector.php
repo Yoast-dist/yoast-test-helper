@@ -13,8 +13,8 @@ class Upgrade_Detector implements Integration {
 	 * @return void
 	 */
 	public function add_hooks() {
-		add_action( 'wpseo_run_upgrade', [ $this, 'yoast_seo_upgrade_ran' ] );
-		add_action( 'update_option_wpseo_premium_version', [ $this, 'yoast_seo_premium_upgrade_ran' ] );
+		\add_action( 'wpseo_run_upgrade', [ $this, 'yoast_seo_upgrade_ran' ] );
+		\add_action( 'update_option_wpseo_premium_version', [ $this, 'yoast_seo_premium_upgrade_ran' ] );
 	}
 
 	/**
@@ -36,7 +36,7 @@ class Upgrade_Detector implements Integration {
 	}
 
 	/**
-	 * Adds a success notitifcation for an upgrade.
+	 * Adds a success notification for an upgrade.
 	 *
 	 * @param string $notification_text The notification text to show.
 	 *
@@ -44,6 +44,6 @@ class Upgrade_Detector implements Integration {
 	 */
 	private function add_notification( $notification_text ) {
 		$notification = new Notification( $notification_text, 'success' );
-		do_action( 'Yoast\WP\Test_Helper\notification', $notification );
+		\do_action( 'Yoast\WP\Test_Helper\notification', $notification );
 	}
 }

@@ -2,6 +2,8 @@
 
 namespace Yoast\WP\Test_Helper\WordPress_Plugins;
 
+use WPSEO_News;
+
 /**
  * Class to represent News SEO.
  */
@@ -66,7 +68,7 @@ class News_SEO implements WordPress_Plugin {
 	/**
 	 * Retrieves the list of features.
 	 *
-	 * @return array List of features.
+	 * @return string[] List of features.
 	 */
 	public function get_features() {
 		return [];
@@ -78,6 +80,6 @@ class News_SEO implements WordPress_Plugin {
 	 * @return string The current version of the plugin.
 	 */
 	public function get_version_constant() {
-		return class_exists( '\WPSEO_News' ) ? \WPSEO_News::VERSION : 'not active';
+		return \class_exists( WPSEO_News::class ) ? WPSEO_News::VERSION : 'not active';
 	}
 }

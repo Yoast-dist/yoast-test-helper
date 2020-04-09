@@ -66,7 +66,7 @@ class Local_SEO implements WordPress_Plugin {
 	/**
 	 * Retrieves the list of features.
 	 *
-	 * @return array List of features.
+	 * @return string[] List of features.
 	 */
 	public function get_features() {
 		return [];
@@ -78,6 +78,6 @@ class Local_SEO implements WordPress_Plugin {
 	 * @return string The current version of the plugin.
 	 */
 	public function get_version_constant() {
-		return defined( 'WPSEO_LOCAL_VERSION' ) ? WPSEO_LOCAL_VERSION : 'not active';
+		return \defined( 'WPSEO_LOCAL_VERSION' ) ? \WPSEO_LOCAL_VERSION : 'not active';
 	}
 }

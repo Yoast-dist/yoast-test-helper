@@ -32,7 +32,7 @@ class WordPress_Plugin_Features implements Integration {
 	 */
 	public function add_hooks() {
 		foreach ( $this->plugins as $plugin ) {
-			add_action(
+			\add_action(
 				'admin_post_' . $plugin->get_identifier() . '-feature-reset',
 				[ $this, 'handle_reset_feature' ]
 			);
@@ -45,9 +45,9 @@ class WordPress_Plugin_Features implements Integration {
 	 * @return string Combined features.
 	 */
 	public function get_controls() {
-		$output = array_map( [ $this, 'get_plugin_features' ], $this->plugins );
+		$output = \array_map( [ $this, 'get_plugin_features' ], $this->plugins );
 
-		return implode( '', $output );
+		return \implode( '', $output );
 	}
 
 	/**
@@ -65,19 +65,19 @@ class WordPress_Plugin_Features implements Integration {
 
 		$action = $plugin->get_identifier() . '-feature-reset';
 
-		$fields = implode(
+		$fields = \implode(
 			'',
-			array_map(
-				function ( $name, $feature ) {
-					return sprintf(
+			\array_map(
+				static function ( $name, $feature ) {
+					return \sprintf(
 						'<button id="%s" name="%s" type="submit" class="button secondary">Reset %s</button> ',
-						esc_attr( $feature ) . '_button',
-						esc_attr( $feature ),
-						esc_html( $name )
+						\esc_attr( $feature ) . '_button',
+						\esc_attr( $feature ),
+						\esc_html( $name )
 					);
 				},
 				$features,
-				array_keys( $features )
+				\array_keys( $features )
 			)
 		);
 
@@ -93,7 +93,7 @@ class WordPress_Plugin_Features implements Integration {
 		foreach ( $this->plugins as $plugin ) {
 			$action = $plugin->get_identifier() . '-feature-reset';
 
-			if ( check_admin_referer( $action ) === false ) {
+			if ( \check_admin_referer( $action ) === false ) {
 				continue;
 			}
 
@@ -105,10 +105,9 @@ class WordPress_Plugin_Features implements Integration {
 			break;
 		}
 
-		wp_safe_redirect(
-			self_admin_url(
-				'tools.php?page=' .
-				apply_filters( 'Yoast\WP\Test_Helper\admin_page', '' )
+		\wp_safe_redirect(
+			\self_admin_url(
+				'tools.php?page=' . \apply_filters( 'Yoast\WP\Test_Helper\admin_page', '' )
 			)
 		);
 	}
@@ -126,7 +125,7 @@ class WordPress_Plugin_Features implements Integration {
 				continue;
 			}
 
-			if ( check_admin_referer( $plugin->get_identifier() . '-feature-reset' ) === false ) {
+			if ( \check_admin_referer( $plugin->get_identifier() . '-feature-reset' ) === false ) {
 				continue;
 			}
 
@@ -142,7 +141,7 @@ class WordPress_Plugin_Features implements Integration {
 				);
 			}
 
-			do_action( 'Yoast\WP\Test_Helper\notification', $notification );
+			\do_action( 'Yoast\WP\Test_Helper\notification', $notification );
 		}
 	}
 }

@@ -6,6 +6,7 @@ use Yoast\WP\Test_Helper\WordPress_Plugins\Local_SEO;
 use Yoast\WP\Test_Helper\WordPress_Plugins\News_SEO;
 use Yoast\WP\Test_Helper\WordPress_Plugins\Video_SEO;
 use Yoast\WP\Test_Helper\WordPress_Plugins\WooCommerce_SEO;
+use Yoast\WP\Test_Helper\WordPress_Plugins\WordPress_Plugin;
 use Yoast\WP\Test_Helper\WordPress_Plugins\Yoast_SEO;
 use Yoast\WP\Test_Helper\WordPress_Plugins\Yoast_SEO_Premium;
 
@@ -27,7 +28,7 @@ class Plugin implements Integration {
 	public function __construct() {
 		$this->load_integrations();
 
-		add_action( 'Yoast\WP\Test_Helper\notifications', [ $this, 'admin_page_blocks' ] );
+		\add_action( 'Yoast\WP\Test_Helper\notifications', [ $this, 'admin_page_blocks' ] );
 	}
 
 	/**
@@ -36,8 +37,8 @@ class Plugin implements Integration {
 	 * @return void
 	 */
 	public function add_hooks() {
-		array_map(
-			function ( Integration $integration ) {
+		\array_map(
+			static function ( Integration $integration ) {
 				$integration->add_hooks();
 			},
 			$this->integrations
@@ -51,7 +52,7 @@ class Plugin implements Integration {
 	 */
 	public function admin_page_blocks( Admin_Page $admin_page ) {
 		foreach ( $this->integrations as $integration ) {
-			if ( method_exists( $integration, 'get_controls' ) ) {
+			if ( \method_exists( $integration, 'get_controls' ) ) {
 				$admin_page->add_admin_page_block( [ $integration, 'get_controls' ] );
 			}
 		}
@@ -74,26 +75,26 @@ class Plugin implements Integration {
 		$option = new Option();
 
 		$this->integrations[] = $plugin_version_control;
-		$this->integrations[] = new Development_Mode( $option );
+		$this->integrations[] = new Admin_Page();
 		$this->integrations[] = new Admin_Notifications();
 		$this->integrations[] = new Upgrade_Detector();
-		$this->integrations[] = new Admin_Page();
-		$this->integrations[] = new WordPress_Plugin_Features( $plugins );
-		$this->integrations[] = new Admin_Debug_Info( $option );
+		$this->integrations[] = new Development_Mode( $option );
 		$this->integrations[] = new Plugin_Toggler( $option );
+		$this->integrations[] = new WordPress_Plugin_Features( $plugins );
+		$this->integrations[] = new Schema( $option );
+		$this->integrations[] = new XML_Sitemaps( $option );
 		$this->integrations[] = new Feature_Toggler( $option );
 		$this->integrations[] = new Post_Types( $option );
 		$this->integrations[] = new Taxonomies( $option );
-		$this->integrations[] = new Schema( $option );
 		$this->integrations[] = new Domain_Dropdown( $option );
-		$this->integrations[] = new XML_Sitemaps( $option );
 		$this->integrations[] = new Inline_Script( $option );
+		$this->integrations[] = new Admin_Debug_Info( $option );
 	}
 
 	/**
 	 * Retrieves all the plugins.
 	 *
-	 * @return array
+	 * @return WordPress_Plugins\WordPress_Plugin[]
 	 */
 	private function get_plugins() {
 		return [

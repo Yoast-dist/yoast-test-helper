@@ -10,7 +10,7 @@ class Admin_Page implements Integration {
 	/**
 	 * List of admin page blocks.
 	 *
-	 * @var array
+	 * @var callable[]
 	 */
 	protected $admin_page_blocks = [];
 
@@ -20,9 +20,9 @@ class Admin_Page implements Integration {
 	 * @return void
 	 */
 	public function add_hooks() {
-		add_action( 'admin_menu', [ $this, 'register_admin_menu' ] );
+		\add_action( 'admin_menu', [ $this, 'register_admin_menu' ] );
 
-		add_filter( 'Yoast\WP\Test_Helper\admin_page', [ $this, 'get_admin_page' ] );
+		\add_filter( 'Yoast\WP\Test_Helper\admin_page', [ $this, 'get_admin_page' ] );
 	}
 
 	/**
@@ -41,13 +41,13 @@ class Admin_Page implements Integration {
 	 */
 	public function add_assets() {
 		// CSS file.
-		wp_enqueue_style(
+		\wp_enqueue_style(
 			'yoast-test-admin-style',
-			plugin_dir_url( YOAST_TEST_HELPER_FILE ) . 'assets/css/admin.css',
+			\plugin_dir_url( \YOAST_TEST_HELPER_FILE ) . 'assets/css/admin.css',
 			null,
-			YOAST_TEST_HELPER_VERSION
+			\YOAST_TEST_HELPER_VERSION
 		);
-		wp_enqueue_script( 'masonry' );
+		\wp_enqueue_script( 'masonry' );
 	}
 
 	/**
@@ -56,14 +56,14 @@ class Admin_Page implements Integration {
 	 * @return void
 	 */
 	public function register_admin_menu() {
-		$menu_item = add_management_page(
+		$menu_item = \add_management_page(
 			'Yoast Test',
 			'Yoast Test',
 			'manage_options',
-			sanitize_key( $this->get_admin_page() ),
+			\sanitize_key( $this->get_admin_page() ),
 			[ $this, 'show_admin_page' ]
 		);
-		add_action( 'admin_print_styles-' . $menu_item, [ $this, 'add_assets' ] );
+		\add_action( 'admin_print_styles-' . $menu_item, [ $this, 'add_assets' ] );
 	}
 
 	/**
@@ -85,16 +85,20 @@ class Admin_Page implements Integration {
 	public function show_admin_page() {
 		echo '<h1>Yoast Test Helper</h1>';
 
-		do_action( 'Yoast\WP\Test_Helper\notifications', $this );
+		\do_action( 'Yoast\WP\Test_Helper\notifications', $this );
 
 		echo '<div id="yoast_masonry">';
 		$this->masonry_script();
 
-		array_map(
-			function( $block ) {
+		\array_map(
+			static function( $block ) {
+				$block_output = $block();
+				if ( $block_output === '' ) {
+					return;
+				}
 				echo '<div class="wpseo_test_block">';
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo $block();
+				echo $block_output;
 				echo '</div>';
 			},
 			$this->admin_page_blocks

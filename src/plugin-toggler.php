@@ -2,6 +2,8 @@
 
 namespace Yoast\WP\Test_Helper;
 
+use WPSEO_Utils;
+
 /**
  * Toggles between plugins.
  */
@@ -43,9 +45,9 @@ class Plugin_Toggler implements Integration {
 	 * @return void
 	 */
 	public function add_hooks() {
-		add_action( 'plugins_loaded', [ $this, 'init' ] );
+		\add_action( 'plugins_loaded', [ $this, 'init' ] );
 
-		add_action(
+		\add_action(
 			'admin_post_yoast_seo_plugin_toggler',
 			[ $this, 'handle_submit' ]
 		);
@@ -70,14 +72,14 @@ class Plugin_Toggler implements Integration {
 
 		// Load WordPress core plugin.php when needed.
 		if (
-			! function_exists( 'is_plugin_active' ) ||
-			! function_exists( 'get_plugins' )
+			! \function_exists( 'is_plugin_active' )
+			|| ! \function_exists( 'get_plugins' )
 		) {
-			include_once ABSPATH . 'wp-admin/includes/plugin.php';
+			include_once \ABSPATH . 'wp-admin/includes/plugin.php';
 		}
 
 		// Apply filters to adapt the $this->grouped_name_filter property.
-		$this->grouped_name_filter = apply_filters( 'Yoast\WP\Test_Helper\plugin_toggler_filter', $this->grouped_name_filter );
+		$this->grouped_name_filter = \apply_filters( 'Yoast\WP\Test_Helper\plugin_toggler_filter', $this->grouped_name_filter );
 
 		$this->init_plugin_groups();
 
@@ -91,7 +93,7 @@ class Plugin_Toggler implements Integration {
 	 * @return void
 	 */
 	public function add_toggle() {
-		$nonce = wp_create_nonce( 'yoast-plugin-toggle' );
+		$nonce = \wp_create_nonce( 'yoast-plugin-toggle' );
 
 		/** \WP_Admin_Bar $wp_admin_bar */
 		global $wp_admin_bar;
@@ -99,15 +101,15 @@ class Plugin_Toggler implements Integration {
 		// Add a menu for each group.
 		foreach ( $this->plugin_groups as $group => $plugins ) {
 			$active_plugin = $this->get_active_plugin( $group );
-			$menu_id       = 'wpseo-plugin-toggler-' . sanitize_title( $group );
+			$menu_id       = 'wpseo-plugin-toggler-' . \sanitize_title( $group );
 			$menu_title    = $active_plugin;
 
 			// Menu title fallback: active plugin > group > first plugin.
 			if ( $menu_title === '' ) {
 				$menu_title = $group;
 				if ( $menu_title === '' ) {
-					reset( $plugins );
-					$menu_title = key( $plugins );
+					\reset( $plugins );
+					$menu_title = \key( $plugins );
 				}
 			}
 
@@ -129,11 +131,11 @@ class Plugin_Toggler implements Integration {
 				$wp_admin_bar->add_node(
 					[
 						'parent' => $menu_id,
-						'id'     => 'wpseo-plugin-toggle-' . sanitize_title( $plugin ),
+						'id'     => 'wpseo-plugin-toggle-' . \sanitize_title( $plugin ),
 						'title'  => 'Switch to ' . $plugin,
 						'href'   => '#',
 						'meta'   => [
-							'onclick' => sprintf(
+							'onclick' => \sprintf(
 								'Yoast_Plugin_Toggler.toggle_plugin( "%1$s", "%2$s", "%3$s" )',
 								$group,
 								$plugin,
@@ -153,11 +155,11 @@ class Plugin_Toggler implements Integration {
 	 */
 	public function add_assets() {
 		// JS file.
-		wp_enqueue_script(
+		\wp_enqueue_script(
 			'yoast-toggle-script',
-			plugin_dir_url( YOAST_TEST_HELPER_FILE ) . 'assets/js/yoast-toggle.js',
+			\plugin_dir_url( \YOAST_TEST_HELPER_FILE ) . 'assets/js/yoast-toggle.js',
 			[],
-			YOAST_TEST_HELPER_VERSION,
+			\YOAST_TEST_HELPER_VERSION,
 			true
 		);
 	}
@@ -176,8 +178,8 @@ class Plugin_Toggler implements Integration {
 
 		// If nonce is valid.
 		if ( $this->verify_nonce() ) {
-			$group  = filter_input( INPUT_GET, 'group' );
-			$plugin = filter_input( INPUT_GET, 'plugin' );
+			$group  = \filter_input( \INPUT_GET, 'group' );
+			$plugin = \filter_input( \INPUT_GET, 'plugin' );
 
 			// First deactivate the current plugin.
 			$this->deactivate_plugin_group( $group );
@@ -192,7 +194,7 @@ class Plugin_Toggler implements Integration {
 		}
 
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- The util takes care of escaping.
-		echo \WPSEO_Utils::format_json_encode( $response );
+		echo WPSEO_Utils::format_json_encode( $response );
 		die();
 	}
 
@@ -217,11 +219,11 @@ class Plugin_Toggler implements Integration {
 	 * @return void
 	 */
 	public function handle_submit() {
-		if ( check_admin_referer( 'yoast_seo_plugin_toggler' ) !== false ) {
+		if ( \check_admin_referer( 'yoast_seo_plugin_toggler' ) !== false ) {
 			$this->option->set( 'plugin_toggler', isset( $_POST['plugin_toggler'] ) );
 		}
 
-		wp_safe_redirect( self_admin_url( 'tools.php?page=' . apply_filters( 'Yoast\WP\Test_Helper\admin_page', '' ) ) );
+		\wp_safe_redirect( \self_admin_url( 'tools.php?page=' . \apply_filters( 'Yoast\WP\Test_Helper\admin_page', '' ) ) );
 	}
 
 	/**
@@ -232,7 +234,7 @@ class Plugin_Toggler implements Integration {
 	 * @return bool True if the rights are present.
 	 */
 	private function has_rights() {
-		return ( is_admin() && current_user_can( 'activate_plugins' ) );
+		return ( \is_admin() && \current_user_can( 'activate_plugins' ) );
 	}
 
 	/**
@@ -242,6 +244,7 @@ class Plugin_Toggler implements Integration {
 	 * Uses $this->grouped_name_filter regex to get the group.
 	 *
 	 * Example:
+	 * <code>
 	 * $this->grouped_name_filter = '/^(Yoast SEO)$|^(Yoast SEO)[^:]{1}/'
 	 * $plugin_groups = array(
 	 *   'Yoast SEO' => array(
@@ -251,12 +254,13 @@ class Plugin_Toggler implements Integration {
 	 *     'Yoast SEO Premium 8.4' => 'wordpress-seo-premium 8.4/wp-seo-premium.php',
 	 *   ),
 	 * );
+	 * </code>
 	 *
 	 * @return array The plugins grouped by the regex matches.
 	 */
 	private function get_plugin_groups() {
 		// Use WordPress to get all the plugins with their data.
-		$plugins       = get_plugins();
+		$plugins       = \get_plugins();
 		$plugin_groups = [];
 
 		foreach ( $plugins as $file => $data ) {
@@ -282,17 +286,17 @@ class Plugin_Toggler implements Integration {
 	 * Example filter:
 	 * $grouped_name_filter = '/^(Yoast SEO)$|^(Yoast SEO)[^:]{1}/'
 	 *
-	 * @param string $plugin_name         The plugin name.
+	 * @param string $plugin_name The plugin name.
 	 *
 	 * @return string The group.
 	 */
 	private function get_group_from_plugin_name( $plugin_name ) {
 		$matches = [];
 
-		if ( preg_match( $this->grouped_name_filter, $plugin_name, $matches ) ) {
+		if ( \preg_match( $this->grouped_name_filter, $plugin_name, $matches ) ) {
 			foreach ( $matches as $match ) {
 				if ( $match !== '' ) {
-					return trim( $match );
+					return \trim( $match );
 				}
 			}
 		}
@@ -313,17 +317,17 @@ class Plugin_Toggler implements Integration {
 
 		foreach ( $plugin_groups as $group => $plugins ) {
 			foreach ( $plugins as $plugin => $plugin_path ) {
-				$full_plugin_path = ABSPATH . 'wp-content/plugins/' . plugin_basename( $plugin_path );
+				$full_plugin_path = \ABSPATH . 'wp-content/plugins/' . \plugin_basename( $plugin_path );
 
 				// Add the plugin to the group if it exists.
-				if ( file_exists( $full_plugin_path ) ) {
+				if ( \file_exists( $full_plugin_path ) ) {
 					$installed[ $group ][ $plugin ] = $plugin_path;
 				}
 			}
 
 			if ( $prune ) {
 				// Remove the group entirely if there are less than 2 plugins in it.
-				if ( count( $installed[ $group ] ) < 2 ) {
+				if ( \count( $installed[ $group ] ) < 2 ) {
 					unset( $installed[ $group ] );
 				}
 			}
@@ -340,13 +344,13 @@ class Plugin_Toggler implements Integration {
 	 * @return string The plugin name or an empty string.
 	 */
 	private function get_active_plugin( $group ) {
-		if ( ! array_key_exists( $group, $this->plugin_groups ) ) {
+		if ( ! \array_key_exists( $group, $this->plugin_groups ) ) {
 			return '';
 		}
 
 		$plugins = $this->plugin_groups[ $group ];
 		foreach ( $plugins as $plugin => $plugin_path ) {
-			if ( is_plugin_active( $plugin_path ) ) {
+			if ( \is_plugin_active( $plugin_path ) ) {
 				return $plugin;
 			}
 		}
@@ -361,12 +365,12 @@ class Plugin_Toggler implements Integration {
 	 */
 	private function add_additional_hooks() {
 		// Setting AJAX-request to toggle the plugin.
-		add_action( 'wp_ajax_toggle_plugin', [ $this, 'ajax_toggle_plugin' ] );
+		\add_action( 'wp_ajax_toggle_plugin', [ $this, 'ajax_toggle_plugin' ] );
 
 		// Adding assets.
-		add_action( 'admin_init', [ $this, 'add_assets' ] );
+		\add_action( 'admin_init', [ $this, 'add_assets' ] );
 
-		add_action( 'admin_bar_menu', [ $this, 'add_toggle' ], 100 );
+		\add_action( 'admin_bar_menu', [ $this, 'add_toggle' ], 100 );
 	}
 
 	/**
@@ -378,15 +382,15 @@ class Plugin_Toggler implements Integration {
 	 * @return void
 	 */
 	private function activate_plugin( $group, $plugin ) {
-		if ( ! array_key_exists( $group, $this->plugin_groups ) ) {
+		if ( ! \array_key_exists( $group, $this->plugin_groups ) ) {
 			return;
 		}
-		if ( ! array_key_exists( $plugin, $this->plugin_groups[ $group ] ) ) {
+		if ( ! \array_key_exists( $plugin, $this->plugin_groups[ $group ] ) ) {
 			return;
 		}
 
 		$plugin_path = $this->plugin_groups[ $group ][ $plugin ];
-		activate_plugin( plugin_basename( $plugin_path ), null, false, true );
+		\activate_plugin( \plugin_basename( $plugin_path ), null, false, true );
 	}
 
 	/**
@@ -399,14 +403,14 @@ class Plugin_Toggler implements Integration {
 	 * @return void
 	 */
 	private function deactivate_plugin_group( $group ) {
-		if ( ! array_key_exists( $group, $this->plugin_groups ) ) {
+		if ( ! \array_key_exists( $group, $this->plugin_groups ) ) {
 			return;
 		}
 
 		$plugins = $this->plugin_groups[ $group ];
-		foreach ( $plugins as $plugin => $plugin_path ) {
-			if ( is_plugin_active( $plugin_path ) ) {
-				deactivate_plugins( plugin_basename( $plugin_path ), true );
+		foreach ( $plugins as $plugin_path ) {
+			if ( \is_plugin_active( $plugin_path ) ) {
+				\deactivate_plugins( \plugin_basename( $plugin_path ), true );
 			}
 		}
 	}
@@ -418,10 +422,10 @@ class Plugin_Toggler implements Integration {
 	 */
 	private function verify_nonce() {
 		// Get the nonce value.
-		$ajax_nonce = filter_input( INPUT_GET, 'ajax_nonce' );
+		$ajax_nonce = \filter_input( \INPUT_GET, 'ajax_nonce' );
 
 		// If nonce is valid return true.
-		if ( wp_verify_nonce( $ajax_nonce, 'yoast-plugin-toggle' ) ) {
+		if ( \wp_verify_nonce( $ajax_nonce, 'yoast-plugin-toggle' ) ) {
 			return true;
 		}
 	}
@@ -436,7 +440,7 @@ class Plugin_Toggler implements Integration {
 		$plugin_groups = $this->get_plugin_groups();
 
 		// Apply filters to extend the $this->plugin_groups property.
-		$plugin_groups = (array) apply_filters( 'Yoast\WP\Test_Helper\plugin_toggle_extend', $plugin_groups );
+		$plugin_groups = (array) \apply_filters( 'Yoast\WP\Test_Helper\plugin_toggle_extend', $plugin_groups );
 
 		// Check the plugins after the filter.
 		$this->plugin_groups = $this->check_plugins( $plugin_groups );

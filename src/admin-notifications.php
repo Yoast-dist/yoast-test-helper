@@ -20,8 +20,8 @@ class Admin_Notifications implements Integration {
 	 * @return void
 	 */
 	public function add_hooks() {
-		add_action( 'Yoast\WP\Test_Helper\notification', [ $this, 'add_notification' ], 10, 2 );
-		add_action( 'Yoast\WP\Test_Helper\notifications', [ $this, 'display_notifications' ] );
+		\add_action( 'Yoast\WP\Test_Helper\notification', [ $this, 'add_notification' ], 10, 2 );
+		\add_action( 'Yoast\WP\Test_Helper\notifications', [ $this, 'display_notifications' ] );
 	}
 
 	/**
@@ -51,12 +51,11 @@ class Admin_Notifications implements Integration {
 
 		echo '<div style="margin: 15px 0 15px -15px;">';
 		foreach ( $notifications as $notification ) {
-			// phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
-			echo '<div class="notice notice-' . esc_attr( $notification->get_type() ) . '"><p>' . wp_kses_post( $notification->get_message() ) . '</p></div>';
+			echo '<div class="notice notice-' . \esc_attr( $notification->get_type() ) . '"><p>' . \wp_kses_post( $notification->get_message() ) . '</p></div>';
 		}
 		echo '</div>';
 
-		delete_user_meta( get_current_user_id(), $this->get_option_name() );
+		\delete_user_meta( \get_current_user_id(), $this->get_option_name() );
 	}
 
 	/**
@@ -65,8 +64,8 @@ class Admin_Notifications implements Integration {
 	 * @return Notification[] List of notifications.
 	 */
 	protected function get_notifications() {
-		$saved = get_user_meta( get_current_user_id(), $this->get_option_name(), true );
-		if ( ! is_array( $saved ) ) {
+		$saved = \get_user_meta( \get_current_user_id(), $this->get_option_name(), true );
+		if ( ! \is_array( $saved ) ) {
 			return [];
 		}
 
@@ -85,11 +84,11 @@ class Admin_Notifications implements Integration {
 	/**
 	 * Saves the notifications for the next page request.
 	 *
-	 * @param array $notifications Notifications to save.
+	 * @param Notification[] $notifications Notifications to save.
 	 *
 	 * @return void
 	 */
 	protected function save_notifications( $notifications ) {
-		update_user_meta( get_current_user_id(), $this->get_option_name(), $notifications );
+		\update_user_meta( \get_current_user_id(), $this->get_option_name(), $notifications );
 	}
 }
