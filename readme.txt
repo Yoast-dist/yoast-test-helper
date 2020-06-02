@@ -1,9 +1,9 @@
-=== Yoast test helper ===
+=== Yoast Test Helper ===
 Contributors: yoast, joostdevalk, omarreiss, jipmoors, herregroen
 Tags: Yoast, Yoast SEO, development
 Requires at least: 5.4
 Tested up to: 5.4
-Stable tag: 1.6.0
+Stable tag: 1.7.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -34,6 +34,13 @@ If you find bugs or would like to contribute, see our [GitHub repo](https://gith
 1. Screenshot of the Yoast test helper admin page.
 
 == Changelog ==
+
+= 1.7 =
+
+Enhancements:
+
+* Drops the table for prominent words (used by our internal linking functionality, among others) when you hit reset indexables.
+* Some minor code style fixes.
 
 = 1.6 =
 

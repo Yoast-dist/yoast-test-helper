@@ -7,8 +7,8 @@
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3 or higher
  *
  * @wordpress-plugin
- * Plugin Name: Yoast Development: Test Helper
- * Version:     1.6.0
+ * Plugin Name: Yoast Test Helper
+ * Version:     1.7.0
  * Plugin URI:  https://github.com/yoast/yoast-test-helper
  * Description: Utility to provide testing features for Yoast plugins.
  * Author:      Team Yoast
@@ -33,7 +33,7 @@
 
 define( 'YOAST_TEST_HELPER_FILE', __FILE__ );
 define( 'YOAST_TEST_HELPER_DIR', dirname( YOAST_TEST_HELPER_FILE ) );
-define( 'YOAST_TEST_HELPER_VERSION', '1.6.0' );
+define( 'YOAST_TEST_HELPER_VERSION', '1.7.0' );
 
 if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 	require __DIR__ . '/vendor/autoload.php';

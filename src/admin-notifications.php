@@ -49,6 +49,12 @@ class Admin_Notifications implements Integration {
 			return;
 		}
 
+		foreach ( $notifications as $notification ) {
+			if ( ! \is_a( $notification, Notification::class ) ) {
+				continue;
+			}
+		}
+
 		echo '<div style="margin: 15px 0 15px -15px;">';
 		foreach ( $notifications as $notification ) {
 			echo '<div class="notice notice-' . \esc_attr( $notification->get_type() ) . '"><p>' . \wp_kses_post( $notification->get_message() ) . '</p></div>';
@@ -78,7 +84,7 @@ class Admin_Notifications implements Integration {
 	 * @return string The name of the option.
 	 */
 	protected function get_option_name() {
-		return 'yoast_version_control_notifications';
+		return 'yoast_test_helper_notifications';
 	}
 
 	/**
