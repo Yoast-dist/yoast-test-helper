@@ -3,7 +3,7 @@ Contributors: yoast, joostdevalk, omarreiss, jipmoors, herregroen
 Tags: Yoast, Yoast SEO, development
 Requires at least: 5.4
 Tested up to: 5.5
-Stable tag: 1.9.0
+Stable tag: 1.10-RC1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -35,7 +35,22 @@ If you find bugs or would like to contribute, see our [GitHub repo](https://gith
 
 == Changelog ==
 
+= 1.10 =
+
+Release Date: xx.x
+
+Bugfixes:
+
+* Fixes a bug where the `Start SEO Data optimization` button was not shown after resetting the indexables tables and migrations.
+* Fixes a bug where no notification was shown to reindex your site when resetting the indexables tables and migrations, the prominent words table, and the internal link count.
+
+Other:
+
+* Makes the plugin translateable.
+
 = 1.9 =
+
+Release Date: October 6th, 2020
 
 Bugfixes:
 
@@ -43,6 +58,8 @@ Bugfixes:
 * Fixes a bug where links could be attached to the wrong indexables when resetting the indexable tables and migrations.
 
 = 1.8 =
+
+Release Date: July 8th, 2020
 
 Enhancements:
 
@@ -55,12 +72,16 @@ Bugfixes:
 
 = 1.7 =
 
+Release Date: June 2nd, 2020
+
 Enhancements:
 
 * Drops the table for prominent words (used by our internal linking functionality, among others) when you hit reset indexables.
 * Some minor code style fixes.
 
 = 1.6 =
+
+Release Date: April 9th, 2020
 
 Enhancements:
 
