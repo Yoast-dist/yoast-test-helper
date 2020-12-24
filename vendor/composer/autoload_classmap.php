@@ -24,6 +24,7 @@ return array(
     'Yoast\\WP\\Test_Helper\\Plugin_Version_Control' => $baseDir . '/src/plugin-version-control.php',
     'Yoast\\WP\\Test_Helper\\Post_Types' => $baseDir . '/src/post-types.php',
     'Yoast\\WP\\Test_Helper\\Schema' => $baseDir . '/src/schema.php',
+    'Yoast\\WP\\Test_Helper\\Support_Session' => $baseDir . '/src/support-session.php',
     'Yoast\\WP\\Test_Helper\\Taxonomies' => $baseDir . '/src/taxonomies.php',
     'Yoast\\WP\\Test_Helper\\Upgrade_Detector' => $baseDir . '/src/upgrade-detector.php',
     'Yoast\\WP\\Test_Helper\\WordPress_Plugin_Features' => $baseDir . '/src/wordpress-plugin-features.php',

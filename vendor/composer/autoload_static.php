@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInite49e153489a2b21f3c9d0e9054f7d2f9
+class ComposerStaticInitc300532ee85c5aaf35fb89ed0001aaad
 {
     public static $classMap = array (
         'Yoast\\WP\\Test_Helper\\Admin_Bar_Panel' => __DIR__ . '/../..' . '/src/admin-bar-panel.php',
@@ -25,6 +25,7 @@ class ComposerStaticInite49e153489a2b21f3c9d0e9054f7d2f9
         'Yoast\\WP\\Test_Helper\\Plugin_Version_Control' => __DIR__ . '/../..' . '/src/plugin-version-control.php',
         'Yoast\\WP\\Test_Helper\\Post_Types' => __DIR__ . '/../..' . '/src/post-types.php',
         'Yoast\\WP\\Test_Helper\\Schema' => __DIR__ . '/../..' . '/src/schema.php',
+        'Yoast\\WP\\Test_Helper\\Support_Session' => __DIR__ . '/../..' . '/src/support-session.php',
         'Yoast\\WP\\Test_Helper\\Taxonomies' => __DIR__ . '/../..' . '/src/taxonomies.php',
         'Yoast\\WP\\Test_Helper\\Upgrade_Detector' => __DIR__ . '/../..' . '/src/upgrade-detector.php',
         'Yoast\\WP\\Test_Helper\\WordPress_Plugin_Features' => __DIR__ . '/../..' . '/src/wordpress-plugin-features.php',
@@ -43,7 +44,7 @@ class ComposerStaticInite49e153489a2b21f3c9d0e9054f7d2f9
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInite49e153489a2b21f3c9d0e9054f7d2f9::$classMap;
+            $loader->classMap = ComposerStaticInitc300532ee85c5aaf35fb89ed0001aaad::$classMap;
 
         }, null, ClassLoader::class);
     }
