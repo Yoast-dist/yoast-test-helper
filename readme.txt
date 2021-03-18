@@ -3,7 +3,7 @@ Contributors: yoast, joostdevalk, omarreiss, jipmoors, herregroen
 Tags: Yoast, Yoast SEO, development
 Requires at least: 5.6
 Tested up to: 5.7
-Stable tag: 1.13-RC1
+Stable tag: 1.13
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -38,7 +38,7 @@ If you find bugs or would like to contribute, see our [GitHub repo](https://gith
 
 = 1.13 =
 
-Release Date:
+Release Date: March 18th, 2021
 
 Bugfixes:
 
