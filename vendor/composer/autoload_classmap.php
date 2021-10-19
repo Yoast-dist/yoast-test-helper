@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Yoast\\WP\\Test_Helper\\Admin_Bar_Panel' => $baseDir . '/src/admin-bar-panel.php',
     'Yoast\\WP\\Test_Helper\\Admin_Debug_Info' => $baseDir . '/src/admin-debug-info.php',
     'Yoast\\WP\\Test_Helper\\Admin_Notifications' => $baseDir . '/src/admin-notifications.php',
@@ -23,6 +24,8 @@ return array(
     'Yoast\\WP\\Test_Helper\\Plugin_Toggler' => $baseDir . '/src/plugin-toggler.php',
     'Yoast\\WP\\Test_Helper\\Plugin_Version_Control' => $baseDir . '/src/plugin-version-control.php',
     'Yoast\\WP\\Test_Helper\\Post_Types' => $baseDir . '/src/post-types.php',
+    'Yoast\\WP\\Test_Helper\\Query_Monitor' => $baseDir . '/src/query-monitor.php',
+    'Yoast\\WP\\Test_Helper\\Query_Monitor_Output' => $baseDir . '/src/query-monitor-output.php',
     'Yoast\\WP\\Test_Helper\\Schema' => $baseDir . '/src/schema.php',
     'Yoast\\WP\\Test_Helper\\Support_Session' => $baseDir . '/src/support-session.php',
     'Yoast\\WP\\Test_Helper\\Taxonomies' => $baseDir . '/src/taxonomies.php',

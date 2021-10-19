@@ -4,9 +4,10 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit7738603ad44a9b926c0537bd8b3608ee
+class ComposerStaticInit7434e885c2be7eb08d0e9530eb5cb914
 {
     public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Yoast\\WP\\Test_Helper\\Admin_Bar_Panel' => __DIR__ . '/../..' . '/src/admin-bar-panel.php',
         'Yoast\\WP\\Test_Helper\\Admin_Debug_Info' => __DIR__ . '/../..' . '/src/admin-debug-info.php',
         'Yoast\\WP\\Test_Helper\\Admin_Notifications' => __DIR__ . '/../..' . '/src/admin-notifications.php',
@@ -24,6 +25,8 @@ class ComposerStaticInit7738603ad44a9b926c0537bd8b3608ee
         'Yoast\\WP\\Test_Helper\\Plugin_Toggler' => __DIR__ . '/../..' . '/src/plugin-toggler.php',
         'Yoast\\WP\\Test_Helper\\Plugin_Version_Control' => __DIR__ . '/../..' . '/src/plugin-version-control.php',
         'Yoast\\WP\\Test_Helper\\Post_Types' => __DIR__ . '/../..' . '/src/post-types.php',
+        'Yoast\\WP\\Test_Helper\\Query_Monitor' => __DIR__ . '/../..' . '/src/query-monitor.php',
+        'Yoast\\WP\\Test_Helper\\Query_Monitor_Output' => __DIR__ . '/../..' . '/src/query-monitor-output.php',
         'Yoast\\WP\\Test_Helper\\Schema' => __DIR__ . '/../..' . '/src/schema.php',
         'Yoast\\WP\\Test_Helper\\Support_Session' => __DIR__ . '/../..' . '/src/support-session.php',
         'Yoast\\WP\\Test_Helper\\Taxonomies' => __DIR__ . '/../..' . '/src/taxonomies.php',
@@ -44,7 +47,7 @@ class ComposerStaticInit7738603ad44a9b926c0537bd8b3608ee
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit7738603ad44a9b926c0537bd8b3608ee::$classMap;
+            $loader->classMap = ComposerStaticInit7434e885c2be7eb08d0e9530eb5cb914::$classMap;
 
         }, null, ClassLoader::class);
     }

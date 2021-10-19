@@ -2,8 +2,8 @@
 Contributors: yoast, joostdevalk, omarreiss, jipmoors, herregroen
 Tags: Yoast, Yoast SEO, development
 Requires at least: 5.6
-Tested up to: 5.7
-Stable tag: 1.14
+Tested up to: 5.8
+Stable tag: 1.15.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -35,6 +35,18 @@ If you find bugs or would like to contribute, see our [GitHub repo](https://gith
 1. Screenshot of the Yoast test helper admin page.
 
 == Changelog ==
+
+= 1.15 =
+
+Release date October 19th, 2021
+
+Enhancements:
+
+* Add Indexable data to Query Monitor.
+
+Bugfix:
+
+* Fixes a bug where not all the transients that hold unindexed counts were deleted when users hit the "Reset Indexables & Migrations" button.
 
 = 1.14 =
 
