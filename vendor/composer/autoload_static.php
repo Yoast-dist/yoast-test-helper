@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit7434e885c2be7eb08d0e9530eb5cb914
+class ComposerStaticInitfe188a974674b495773fbd29faaeda1e
 {
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
@@ -14,6 +14,7 @@ class ComposerStaticInit7434e885c2be7eb08d0e9530eb5cb914
         'Yoast\\WP\\Test_Helper\\Admin_Page' => __DIR__ . '/../..' . '/src/admin-page.php',
         'Yoast\\WP\\Test_Helper\\Development_Mode' => __DIR__ . '/../..' . '/src/development-mode.php',
         'Yoast\\WP\\Test_Helper\\Domain_Dropdown' => __DIR__ . '/../..' . '/src/domain-dropdown.php',
+        'Yoast\\WP\\Test_Helper\\Downgrader' => __DIR__ . '/../..' . '/src/downgrader.php',
         'Yoast\\WP\\Test_Helper\\Feature_Toggler' => __DIR__ . '/../..' . '/src/feature-toggler.php',
         'Yoast\\WP\\Test_Helper\\Form_Presenter' => __DIR__ . '/../..' . '/src/form-presenter.php',
         'Yoast\\WP\\Test_Helper\\Indexing_Reason_Integration' => __DIR__ . '/../..' . '/src/indexing-reason-integration.php',
@@ -28,7 +29,6 @@ class ComposerStaticInit7434e885c2be7eb08d0e9530eb5cb914
         'Yoast\\WP\\Test_Helper\\Query_Monitor' => __DIR__ . '/../..' . '/src/query-monitor.php',
         'Yoast\\WP\\Test_Helper\\Query_Monitor_Output' => __DIR__ . '/../..' . '/src/query-monitor-output.php',
         'Yoast\\WP\\Test_Helper\\Schema' => __DIR__ . '/../..' . '/src/schema.php',
-        'Yoast\\WP\\Test_Helper\\Support_Session' => __DIR__ . '/../..' . '/src/support-session.php',
         'Yoast\\WP\\Test_Helper\\Taxonomies' => __DIR__ . '/../..' . '/src/taxonomies.php',
         'Yoast\\WP\\Test_Helper\\Upgrade_Detector' => __DIR__ . '/../..' . '/src/upgrade-detector.php',
         'Yoast\\WP\\Test_Helper\\WordPress_Plugin_Features' => __DIR__ . '/../..' . '/src/wordpress-plugin-features.php',
@@ -47,7 +47,7 @@ class ComposerStaticInit7434e885c2be7eb08d0e9530eb5cb914
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit7434e885c2be7eb08d0e9530eb5cb914::$classMap;
+            $loader->classMap = ComposerStaticInitfe188a974674b495773fbd29faaeda1e::$classMap;
 
         }, null, ClassLoader::class);
     }
