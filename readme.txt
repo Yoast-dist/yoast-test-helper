@@ -3,7 +3,7 @@ Contributors: yoast, joostdevalk, omarreiss, jipmoors, herregroen
 Tags: Yoast, Yoast SEO, development
 Requires at least: 5.8
 Tested up to: 5.9
-Stable tag: 1.16-RC1
+Stable tag: 1.16-RC2
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -41,7 +41,7 @@ Release date: March 22nd, 2022
 
 Enhancements:
 
-* Adds a new tool to safely downgrade Yoast SEO, including reverting all run migrations and resetting the version number.
+* Adds a new tool to safely downgrade Yoast SEO, including reverting all run migrations and resetting the version number. The tool currently works only for the free version of the plugin, without Premium enabled.
 
 Other:
 
