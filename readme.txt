@@ -3,7 +3,7 @@ Contributors: yoast, joostdevalk, omarreiss, jipmoors, herregroen
 Tags: Yoast, Yoast SEO, development
 Requires at least: 5.8
 Tested up to: 5.9
-Stable tag: 1.16
+Stable tag: 1.17-RC1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -34,6 +34,14 @@ If you find bugs or would like to contribute, see our [GitHub repo](https://gith
 1. Screenshot of the Yoast test helper admin page.
 
 == Changelog ==
+
+= 1.17 =
+
+Release date: May 17th, 2022
+
+Other:
+
+* Various compatibility updates.
 
 = 1.16 =
 
