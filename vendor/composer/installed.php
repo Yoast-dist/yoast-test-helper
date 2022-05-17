@@ -1,22 +1,22 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '1.17-RC2',
-        'version' => '1.17.0.0-RC2',
+        'pretty_version' => '1.17',
+        'version' => '1.17.0.0',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'abb482074655296fcb7608f24559a9aa4fa35267',
+        'reference' => '2950035fe0b6af154979ca1530f0a8b20c1809a5',
         'name' => 'yoast/test-helper',
         'dev' => false,
     ),
     'versions' => array(
         'yoast/test-helper' => array(
-            'pretty_version' => '1.17-RC2',
-            'version' => '1.17.0.0-RC2',
+            'pretty_version' => '1.17',
+            'version' => '1.17.0.0',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'abb482074655296fcb7608f24559a9aa4fa35267',
+            'reference' => '2950035fe0b6af154979ca1530f0a8b20c1809a5',
             'dev_requirement' => false,
         ),
     ),
