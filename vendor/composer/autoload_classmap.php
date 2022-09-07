@@ -16,6 +16,7 @@ return array(
     'Yoast\\WP\\Test_Helper\\Downgrader' => $baseDir . '/src/downgrader.php',
     'Yoast\\WP\\Test_Helper\\Feature_Toggler' => $baseDir . '/src/feature-toggler.php',
     'Yoast\\WP\\Test_Helper\\Form_Presenter' => $baseDir . '/src/form-presenter.php',
+    'Yoast\\WP\\Test_Helper\\Indexables_Page' => $baseDir . '/src/indexables-page.php',
     'Yoast\\WP\\Test_Helper\\Indexing_Reason_Integration' => $baseDir . '/src/indexing-reason-integration.php',
     'Yoast\\WP\\Test_Helper\\Inline_Script' => $baseDir . '/src/inline-script.php',
     'Yoast\\WP\\Test_Helper\\Integration' => $baseDir . '/src/integration-interface.php',

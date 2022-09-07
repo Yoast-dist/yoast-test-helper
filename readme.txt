@@ -1,9 +1,9 @@
 === Yoast Test Helper ===
 Contributors: yoast, joostdevalk, omarreiss, jipmoors, herregroen
 Tags: Yoast, Yoast SEO, development
-Requires at least: 5.8
-Tested up to: 5.9
-Stable tag: 1.17
+Requires at least: 5.9
+Tested up to: 6.0
+Stable tag: 1.18-RC1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -34,6 +34,21 @@ If you find bugs or would like to contribute, see our [GitHub repo](https://gith
 1. Screenshot of the Yoast test helper admin page.
 
 == Changelog ==
+
+= 1.18 =
+
+Release date: September 20th, 2022
+
+Enhancements:
+
+* Adds a schema endpoint to any URL. Suffix the URL with /schema/ and you'll get only the Schema for that URL, pretty printed.
+* Adds option to overwrite the default thresholds of the indexables page.
+
+Other:
+
+* Sets minimum WordPress version to 5.9 and tested up to 6.0.
+* Add reset button for indexable ignore lists.
+
 
 = 1.17 =
 

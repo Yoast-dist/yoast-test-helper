@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInita9a8ff554ef5f3477c32f1172fd94c63
+class ComposerStaticInit72315066e79a139466e298e869de145e
 {
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
@@ -17,6 +17,7 @@ class ComposerStaticInita9a8ff554ef5f3477c32f1172fd94c63
         'Yoast\\WP\\Test_Helper\\Downgrader' => __DIR__ . '/../..' . '/src/downgrader.php',
         'Yoast\\WP\\Test_Helper\\Feature_Toggler' => __DIR__ . '/../..' . '/src/feature-toggler.php',
         'Yoast\\WP\\Test_Helper\\Form_Presenter' => __DIR__ . '/../..' . '/src/form-presenter.php',
+        'Yoast\\WP\\Test_Helper\\Indexables_Page' => __DIR__ . '/../..' . '/src/indexables-page.php',
         'Yoast\\WP\\Test_Helper\\Indexing_Reason_Integration' => __DIR__ . '/../..' . '/src/indexing-reason-integration.php',
         'Yoast\\WP\\Test_Helper\\Inline_Script' => __DIR__ . '/../..' . '/src/inline-script.php',
         'Yoast\\WP\\Test_Helper\\Integration' => __DIR__ . '/../..' . '/src/integration-interface.php',
@@ -47,7 +48,7 @@ class ComposerStaticInita9a8ff554ef5f3477c32f1172fd94c63
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInita9a8ff554ef5f3477c32f1172fd94c63::$classMap;
+            $loader->classMap = ComposerStaticInit72315066e79a139466e298e869de145e::$classMap;
 
         }, null, ClassLoader::class);
     }
