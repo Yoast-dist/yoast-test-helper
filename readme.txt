@@ -3,7 +3,7 @@ Contributors: yoast, joostdevalk, omarreiss, jipmoors, herregroen
 Tags: Yoast, Yoast SEO, development
 Requires at least: 5.9
 Tested up to: 6.0
-Stable tag: 1.18-RC1
+Stable tag: 1.18-RC2
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -41,8 +41,10 @@ Release date: September 20th, 2022
 
 Enhancements:
 
-* Adds a schema endpoint to any URL. Suffix the URL with /schema/ and you'll get only the Schema for that URL, pretty printed.
+* Adds a schema endpoint to any URL. Suffix the URL with /schema/ and you’ll get only the Schema for that URL, improving readability.
 * Adds option to overwrite the default thresholds of the indexables page.
+* Adds a feature toggle to enable the new settings UI.
+* Adds a feature toggle to enable the indexables overview.
 
 Other:
 

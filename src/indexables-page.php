@@ -71,6 +71,10 @@ class Indexables_Page implements Integration {
 	 * @return string The HTML to use to render the controls.
 	 */
 	public function get_controls() {
+		if ( ! \defined( 'YOAST_SEO_INDEXABLES_PAGE' ) || YOAST_SEO_INDEXABLES_PAGE !== true ) {
+			return '';
+		}
+
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Using WPSEO hook.
 		$placeholder_thresholds = \apply_filters( 'wpseo_posts_threshold', Indexables_Page_Helper::POSTS_THRESHOLD );
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Using WPSEO hook.
@@ -93,7 +97,7 @@ class Indexables_Page implements Integration {
 		$output .= '<input type="number" size="5" min=1 max=100 value="' . $value . '" placeholder="' . $placeholder_analyzed_thresholds . '" name="indexables_analyzed_posts_threshold" id="indexables_analyzed_posts_threshold"/><span>%</span><br/>';
 
 
-		return Form_Presenter::get_html( \__( 'Integration page thresholds', 'yoast-test-helper' ), 'yoast_seo_test_indexables_page', $output );
+		return Form_Presenter::get_html( \__( 'Indexables overview thresholds', 'yoast-test-helper' ), 'yoast_seo_test_indexables_page', $output );
 	}
 
 	/**
