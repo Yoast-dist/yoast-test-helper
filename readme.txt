@@ -1,10 +1,10 @@
 === Yoast Test Helper ===
 Contributors: yoast, joostdevalk, omarreiss, jipmoors, herregroen
 Tags: Yoast, Yoast SEO, development
-Requires at least: 5.9
-Tested up to: 6.0
-Stable tag: 1.18-RC2
-Requires PHP: 5.6
+Requires at least: 6.0
+Tested up to: 6.2
+Stable tag: 1.18-RC3
+Requires PHP: 7.2.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,7 +16,6 @@ This plugin makes testing Yoast SEO, Yoast SEO add-ons and integrations and rese
 
 This test helper plugin has several features:
 
-* Toggle between premium and free Yoast SEO versions easily.
 * Easily enable Yoast SEO development mode.
 * Saving and restoring Yoast SEO and Yoast SEO extension options, to test upgrade paths.
 * Add options debug info to Yoast SEO admin pages.
@@ -41,16 +40,14 @@ Release date: September 20th, 2022
 
 Enhancements:
 
-* Adds a schema endpoint to any URL. Suffix the URL with /schema/ and you’ll get only the Schema for that URL, improving readability.
-* Adds option to overwrite the default thresholds of the indexables page.
-* Adds a feature toggle to enable the new settings UI.
-* Adds a feature toggle to enable the indexables overview.
+* Adds a `schema` endpoint to any URL. Suffix the URL with `/schema/` and you'll get only the Schema for that URL, pretty printed.
 
 Other:
 
-* Sets minimum WordPress version to 5.9 and tested up to 6.0.
-* Add reset button for indexable ignore lists.
-
+* Removes the checkbox to enable the feature flag for the structured data blocks.
+* Sets the WordPress tested up to version to 6.2.
+* Sets minimum WordPress version to 6.0.
+* Drops compatibility with PHP 5.6, 7.0 and 7.1.
 
 = 1.17 =
 

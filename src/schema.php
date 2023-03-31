@@ -33,10 +33,6 @@ class Schema implements Integration {
 			\add_filter( 'wpseo_debug_json_data', [ $this, 'replace_domain' ] );
 		}
 
-		if ( $this->option->get( 'enable_structured_data_blocks' ) === true ) {
-			\add_action( 'init', [ $this, 'enable_feature_flag' ] );
-		}
-
 		if ( $this->option->get( 'enable_schema_endpoint' ) === true ) {
 			\add_action( 'template_redirect', [ $this, 'send_json_ld' ] );
 			\add_action( 'init', [ $this, 'init_rewrite' ] );
@@ -78,13 +74,16 @@ class Schema implements Integration {
 	public function send_json_ld() {
 		global $wp_query;
 
-		$url = \YoastSEO()->meta->for_current_page()->canonical;
-		if ( empty( $url ) || ! isset( $wp_query->query_vars['schema'] ) ) {
+		if ( ! isset( $wp_query->query_vars['schema'] ) ) {
 			return;
 		}
 
 		\header( 'Content-Type: application/ld+json' );
-		\header( 'Link: <' . $url . '>; rel="canonical"' );
+		$url = \YoastSEO()->meta->for_current_page()->canonical;
+		if ( ! empty( $url ) ) {
+			\header( 'Link: <' . $url . '>; rel="canonical"' );
+		}
+
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- This is our self generated Schema, no need for escaping.
 		echo WPSEO_Utils::format_json_encode( \YoastSEO()->meta->for_current_page()->schema );
 		exit;
@@ -107,12 +106,6 @@ class Schema implements Integration {
 			/* translators: %s is replaced by `<code>/schema/</code>` */
 			\sprintf( \esc_html__( 'Enable the %s endpoint for every URL.', 'yoast-test-helper' ), '<code>/schema/</code>' ),
 			$this->option->get( 'enable_schema_endpoint' )
-		);
-
-		$output .= Form_Presenter::create_checkbox(
-			'enable_structured_data_blocks',
-			\esc_html__( 'Enable the feature flag for the structured data blocks.', 'yoast-test-helper' ),
-			$this->option->get( 'enable_structured_data_blocks' )
 		);
 
 		$select_options = [
@@ -147,7 +140,6 @@ class Schema implements Integration {
 		if ( \check_admin_referer( 'yoast_seo_test_schema' ) !== false ) {
 			$this->option->set( 'replace_schema_domain', isset( $_POST['replace_schema_domain'] ) );
 			$this->option->set( 'enable_schema_endpoint', isset( $_POST['enable_schema_endpoint'] ) );
-			$this->option->set( 'enable_structured_data_blocks', isset( $_POST['enable_structured_data_blocks'] ) );
 		}
 
 		$is_needed_breadcrumb = $this->validate_submit( \filter_input( \INPUT_POST, 'is_needed_breadcrumb' ) );
@@ -190,17 +182,6 @@ class Schema implements Integration {
 		}
 
 		return $this->array_value_str_replace( $source, $target, $data );
-	}
-
-	/**
-	 * Enables the feature flag for the structured data blocks.
-	 */
-	public function enable_feature_flag() {
-		if ( \defined( 'YOAST_SEO_SCHEMA_BLOCKS' ) ) { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- The prefix matches that of Yoast SEO, where this flag belongs.
-			return;
-		}
-
-		\define( 'YOAST_SEO_SCHEMA_BLOCKS', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- The prefix matches that of Yoast SEO, where this flag belongs.
 	}
 
 	/**
