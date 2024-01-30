@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'yoast/test-helper',
-        'pretty_version' => '1.18-RC6',
-        'version' => '1.18.0.0-RC6',
-        'reference' => 'dd57e4a0ac68cec07103fed60e4886583b310587',
+        'pretty_version' => '1.18-RC7',
+        'version' => '1.18.0.0-RC7',
+        'reference' => '8a57c34088a8f279b0e622a04a1fd35f9d099d5d',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'yoast/test-helper' => array(
-            'pretty_version' => '1.18-RC6',
-            'version' => '1.18.0.0-RC6',
-            'reference' => 'dd57e4a0ac68cec07103fed60e4886583b310587',
+            'pretty_version' => '1.18-RC7',
+            'version' => '1.18.0.0-RC7',
+            'reference' => '8a57c34088a8f279b0e622a04a1fd35f9d099d5d',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
